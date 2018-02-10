@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[utf8]{inputenc}
+
+
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\title{RapidMiner Handout} 
+\author{FINA 8823 Group Project}
+
+\pagestyle{plain}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{What is Data Mining?}
+
+Christos
+
+\section{What is RapidMiner}
+
+Christos
+
+\section{How to use it?}
+
+Christos
+
+\section{Example: How to classify twitter news for some companies?}
+
+Alex
+
+\subsection{Web Scrapping}
+
+\subsection{Text Analysis}
+
+\subsection{Results}
+
+\section{Other Useful Resources}
+
+Alex
+
+\section{Some useful material}
+
+Alex
+
+\end{document}
