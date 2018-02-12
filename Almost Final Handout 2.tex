@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[utf8]{inputenc}
+
+
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\title{RapidMiner Handout} 
+\author{FINA 8823 Group Project}
+
+\pagestyle{plain}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{What is Data Mining?}
+
+Data mining is the process of discovering patterns in large data sets involving methods at the intersection of machine learning and statistics. It is a process where semi-automatic or automatic analysis of large quantities of data is performed, in order to extract interesting patterns and dependencies. \newline
+
+Data mining as part of knowledge discovery.The knowledge discovery in databases (KDD) process is commonly defined with the stages: \newline
+1.	Selection \newline
+2.	Pre-processing \newline
+3.	Transformation \newline
+4.	Data mining \newline
+5.	Interpretation/evaluation.\newline
+
+Data mining involves six common classes of tasks:
+
+(i) Anomaly detection (outlier/change/deviation detection) – The identification of unusual data records, that might be interesting or data errors that require further investigation. \\
+
+(ii) Association rule learning (dependency modelling) – Searches for relationships between variables. For example, a supermarket might gather data on customer purchasing habits. Using association rule learning, the supermarket can determine which products are frequently bought together and use this information for marketing purposes. \\
+
+(iii) Clustering – is the task of discovering groups and structures in the data that are in some way or another similar. \\
+
+(iv) Classification – is the task of generalizing known structure to apply to new data. For example, an e-mail program might attempt to classify an e-mail as "legitimate" or as "spam". \\
+
+(v) Regression – attempts to find a function which models the data with the least error that is, for estimating the relationships among data or datasets. \\
+
+(vi) Summarization – providing a more compact representation of the data set, including visualization and report generation. \\
+\newline
+
+It is essential to verify that the patterns produced by the data mining algorithms occur in the wider data set (out of sample). It is common for the data mining algorithms to find patterns in the training set which are not present in the general data set. This is called overfitting. To overcome this, the evaluation uses a test set of data on which the data mining algorithm was not trained. The learned patterns are applied to this test set, and the resulting output is compared to the desired output. For example, a data mining algorithm trying to distinguish "spam" from "legitimate" emails would be trained on a training set of sample e-mails. Once trained, the learned patterns would be applied to the test set of e-mails on which it had not been trained. The accuracy of the patterns can then be measured from how many e-mails they correctly classify. \\
+\newline
+
+Bayes' theorem is stated mathematically as the following equation:
+$$ P(A|B)= \frac {P(B|A) P(A)}{P(B)} $$ \newline
+, where $A$ and $B$ are events and $P(B)\neq 0$
+\newline
+\newline
+In the Bayesian (or epistemological) interpretation, probability measures a “degree of belief.” Bayes’ theorem then links the degree of belief in a proposition before and after accounting for evidence. For example, suppose it is believed with 50\% certainty that a coin is twice as likely to land heads than tails. If the coin is flipped a number of times and the outcomes observed, that degree of belief may rise, fall or remain the same depending on the results.\\
+\\
+For proposition A and evidence B,
+$P(A)$, the prior, is the initial degree of belief in $A$.
+$P(A|B)$, the posterior is the degree of belief having accounted for $B$.
+the quotient $\frac{P(B|A)}{P(B)}$ represents the support $B$ provides for $A$.
+
+
+\section{What is RapidMiner}
+
+RapidMiner provide an advanced analytical solution through template-based frameworks that speed delivery and reduce errors by nearly eliminating the need to write code. It provides data mining and machine learning procedures including: \\
+
+- data loading and transformation \\
+- data preprocessing and visualization \\
+- predictive analytics and statistical modeling \\
+- evaluation, and deployment \\
+
+RapidMiner is written in Java and uses a GUI to design and execute analytical Processes which consist of multiple operators. Each operator performs a single task within the process, and the output of each operator forms the input of the next one. \\
+
+Multiple Operators exist for each of the following tasks: \\
+- Data Access\\
+- Blending\\
+- Cleansing\\
+- Modeling\\
+- Scoring\\
+- Validation\\
+- Utility\\
+- Extensions\\
+
+
+Individual functions can be called from the command line. \\
+
+RapidMiner functionality can be extended with additional plugins which are made available via RapidMiner Marketplace. The RapidMiner Marketplace provides a platform for developers to create data analysis algorithms and publish them to the community.
+
+
+\section{How to use it?}
+
+Christos
+
+\section{Example: How to classify twitter news for some companies?}
+
+To illustrate how we can use RapidMiner to do web scrapping and text classification we provide a simple example process that scrapes content from Twitter and perform some useful analysis. More specifically, we import twits from selected big companies (Yahoo, General Electric, IBM, Amazon and Google) into RapidMiner, classify them in important/not important, cluster the twits into different groups, and finally perform a Naive Bayes model that can predict the importance of the scraped twits. The steps are detailed below: \\
+\\
+[FIGURE 1] \\
+
+
+\subsection{Web Scrapping}
+
+In this step we use a “Data Access” operator called “Search Twitter” to scrape twits from the companies account. To do this we drag the “Search Twitter” operator to the Process console. They appear in our console as little white boxes with blue birds inside as can be seen in the picture above. If we click on it and set up a connection to twitter: \\
+\\
+[FIGURE 2] \\
+
+Once we done this we are ready to scrape the twits from the user account defined in the field “User” in the Parameters section. We create five similar boxes with connection to twitter and define the companies we want for each of them. By default, Rapidminer algorithm extracts when the twit was created, from what user, the user id, the geo latitude and longitude of the ip, language, retweet count (our specific measure of importante), source, the destined user of the tweet, the destined id, and the text itself. It automatically generate variables for all these attributes. \\
+
+Just like that our web scrapping step is done! After we hit execute button RapidMiner will automatically surf through all the recent 100 twits from Yahoo, General Electric, IBM, Amazon and Google and upload then to our process as a new database.
+
+
+\subsection{Text Analysis}
+
+With the tweets uploaded in our process we can treat the data and perform interesting analysis. Here we describe the following steps until we reach our desired outcomes. \\
+
+(i)	Macros. When treating data several times we have to come up with conditions to select/drop/generate variables. An efficient programming language should define macro variables and store it with whatever content we may refer to later. Once we have done that we can easily change the conditions that are being used in several future processes. Of course, RapidMiner also allow us to do that by using the operator “Set Macros”. In our example, we define two macros, one is the desired processing date of our project and the other is the criteria to classify the importance of the twits. \\
+
+(ii)	“Append”. This is one of the useful resources in the Blending data operators. We use it to combine all the tweets scraped. \\
+
+(iii)	“Generate a variable”. Using this operator we can generate a new variable in our database following whatever criteria we are interested. The two following images illustrates how to do it. In our case we generate a new variable called IMPORTANT-RT according to the function defined inside the “function expressions” field. If we click on the little calculator on the right a window appears if many different functions we can follow to define new variables. Our function sets the variable value as “Important” if the retweet count is higher than 20 and “Not Important” otherwise. \\
+\\
+[FIGURE 3] \\
+[FIGURE 4] \\
+
+(iv)	Next we treat our data using several useful operators. “Filter Examples” allows us to drop/keep data according to conditions we specify. We can set labels to our variables using the operator “Set Role”. The operator “Select Attribute” lets us drop variables or keep the ones we are interested, we use it to define a subset of the variables imported. We will keep working only with the variables “IMPORTANT-RT”, “Text “ and “label’. \\
+
+(v)	“Clustering”. After treating our data, we are ready to tell rapidMiner to cluster our variable “text’, which contains the tweets into different groups, following whatever patterns the clustering algorithm is recognizing in the data. The logic of these algorithms escapes the simple illustration purpose of this handout, so we will skip it. We keep in mind that RapidMiner is very flexible to provide different algorithms, measure types, number of runs, etc. that can generate several different results, according to our interest. The results of the clustering step will be showed in the next section. \\
+
+(vi)	“Naive Bayes”. Another very useful resource in RapidMiner is the “Modelling” class of operators. It contains three different Naïve Bayes models that perform machine learning algorithm in order to predict the outcome of variables of interest. In our example we also perform this method to predict the importance of the twits. RapidMiner aallow us several different criterion of prediction as can be seen from the Parameters box below. We pick the default parameter (“Accuracy”).\\
+\\
+[FIGURE 5] \\
+
+
+\subsection{Results}
+
+Once we defined our process following we execute it and can analyze the results. Just by clicking on the second tab, RapidMiner presents the result in a very interactive way. For example we chose to show the importance of tweets in a bar chart: \\
+\\
+[FIGURE 6] \\
+
+We chose to present the cluster groups defined by the algorithm in a special tab. The result table shows the details and similar patterns – in terms of frequency of words used in the twit texts – within the three clusters generated: \\
+\\
+[FIGURE 5] \\
+
+Finally, we also defined a special tab to output the results of the Naive Bayes prediction: \\
+\\
+[FIGURE 8] \\
+
+\section{Some useful material}
+
+Some useful material 
+
+We remind that this was just one simple illustrative example with the goal to familiarize new users to RapidMIner and show the most useful resources it contains. There is a wide range of functionality the software can perform. To those who want to dig deeper we provide some useful links with materials and videos destined to beginner users of RapidMiner and machine learning processes: \newline
+
+Exploring data with RapidMIner - Andrew Chisholm. Ebook (\$14.95) available in  \newline
+[link]
+\newline
+
+Youtube playlist on RapidMiner: Text Mining, Web Crawling, Web Scraping examples: \newline
+[link]
+\newline
+
+Tutorials on how to use neural nets and Artificial Intelligence to predict trend models: \newline
+[link]
+\newline
+
+More details on how to scrape and treat Twitter texts in RapidMIner: \newline
+[link]
+
+\end{document}
+
